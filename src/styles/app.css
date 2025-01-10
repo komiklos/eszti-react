@@ -11,17 +11,3 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-.container {
-    padding-top: 16px;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
-@media (min-width: 768px) {
-    .container {
-        padding-top: 10%;
-        padding-left: 10%;
-        padding-right: 10%;
-    }
-}
-

@@ -90,3 +90,25 @@ html {
   color: #b56576;
   margin-right: auto;
 }
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--nav-background-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  z-index: 1000;
+}
+
+.dropdown-menu .nav-link {
+  display: block;
+  padding: 10px;
+  color: var(--nav-link-color);
+  text-decoration: none;
+}
+
+.dropdown-menu .nav-link:hover {
+  background-color: var(--nav-link-hover-color);
+  color: white;
+}
