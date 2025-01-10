@@ -1,0 +1,25 @@
+/* src/pages/portfolio/MasonryGallery.css */
+.eszti-masonry-grid {
+    display: flex;
+    margin-left: -16px; /* gutter size offset */
+    width: auto;
+}
+.eszti-masonry-grid_column {
+    padding-left: 16px; /* gutter size */
+    background-clip: padding-box;
+}
+
+.eszti-masonry-grid_column > div {
+    margin-bottom: 16px; /* gutter size */
+}
+
+.gallery-masonry[data-width="full"] {
+    max-width: 100%;
+    padding: 5.2vw;
+}
+
+.eszti-masonry-grid img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
