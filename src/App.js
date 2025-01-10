@@ -8,6 +8,7 @@ import Item3Gallery from './pages/portfolio/Item3Gallery';
 import Shop from "./pages/shop/Shop.js";
 import About from "./pages/about/About.js";
 import Links from "./pages/links/Links.js";
+import './styles/app.css';
 
 function App() {
     return (
