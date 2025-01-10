@@ -3,9 +3,9 @@ import '../../styles/MasonryGallery.css';
 import MasonryGallery from '../../components/gallery/MasonryGallery';
 
 const importAll = (r) => r.keys().map(r);
-const images = importAll(require.context('../../assets/item1', false, /\.(jpeg|jpg|png|gif)$/));
+const images = importAll(require.context('../../assets/category2', false, /\.(jpeg|jpg|png|gif)$/));
 
-export default class Item1Gallery extends Component {
+export default class Category2Gallery extends Component {
     render() {
         const galleryConfig = {
             'data-animation': 'none',

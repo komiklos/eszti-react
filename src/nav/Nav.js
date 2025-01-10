@@ -11,12 +11,12 @@ export default function Nav() {
     const getNavPositionClass = () => {
         switch (location.pathname) {
             case "/":
-            case "/item1":
-                return "nav-item1";
-            case "/item2":
-                return "nav-item2";
-            case "/item3":
-                return "nav-item3";
+            case "/category1":
+                return "nav-category1";
+            case "/category2":
+                return "nav-category2";
+            case "/category3":
+                return "nav-category3";
             case "/shop":
                 return "nav-shop";
             case "/about":
@@ -32,12 +32,12 @@ export default function Nav() {
         switch (location.pathname) {
             case "/":
                 return "portfolio";
-            case "/item1":
-                return "item1";
-            case "/item2":
-                return "item2";
-            case "/item3":
-                return "item3";
+            case "/category1":
+                return "category1";
+            case "/category2":
+                return "category2";
+            case "/category3":
+                return "category3";
             case "/shop":
                 return "shop";
             case "/about":
@@ -56,7 +56,7 @@ export default function Nav() {
   };
 
     const portfolioItemClass = () => {
-        return ["nav-item1", "nav-item2", "nav-item3"].includes(navPositionClass) ? "nav-link current" : "nav-link";
+        return ["nav-category1", "nav-category2", "nav-category3"].includes(navPositionClass) ? "nav-link current" : "nav-link";
     }
 
     const renderNavLink = (to, navClass, title) => {
@@ -96,9 +96,9 @@ export default function Nav() {
                         <p>portfolio</p>
                         {isDropdownOpen && (
                             <div className="dropdown-menu">
-                                {renderDropdownItem("/item1", "nav-item1", "item1")}
-                                {renderDropdownItem("/item2", "nav-item2", "item2")}
-                                {renderDropdownItem("/item3", "nav-item3", "item3")}
+                                {renderDropdownItem("/category1", "nav-category1", "category1")}
+                                {renderDropdownItem("/category2", "nav-category2", "category2")}
+                                {renderDropdownItem("/category3", "nav-category3", "category3")}
                             </div>
                         )}
                     </div>

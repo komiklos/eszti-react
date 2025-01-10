@@ -15,7 +15,7 @@ import art10 from '../../assets/art10.jpeg';
 import art11 from '../../assets/art11.jpeg';
 import art12 from '../../assets/art12.jpeg';
 
-export default class Item2Gallery extends Component {
+export default class Category3Gallery extends Component {
     render() {
         const images = [
             art1,
@@ -39,7 +39,7 @@ export default class Item2Gallery extends Component {
             'data-props': {
                 scrollAnimation: 'none',
                 gutter: 16,
-                numColumns: 1,
+                numColumns: 3,
                 width: 'full',
                 lightboxEnabled: false
             },
