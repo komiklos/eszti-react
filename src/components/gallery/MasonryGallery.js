@@ -17,7 +17,7 @@ const MasonryGallery = ({ images, ...config }) => {
 
     const breakpointColumnsObj = {
         default: config['data-props'].numColumns || 3,
-        1100: 2
+        768: 2
         // 700: 1
     };
 

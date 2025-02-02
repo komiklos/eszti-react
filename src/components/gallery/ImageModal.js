@@ -1,4 +1,3 @@
-// src/components/ImageModal.js
 import React from 'react';
 import '../../styles/ImageModal.css';
 
@@ -8,8 +7,10 @@ const ImageModal = ({ isOpen, image, onClose }) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <img src={image} alt="modal" />
-                {/*<button className="close-button" onClick={onClose}>Close</button>*/}
+                <div className="close-button" onClick={onClose}>X</div>
+                <div className="image-container">
+                    <img src={image} alt="modal" />
+                </div>
             </div>
         </div>
     );

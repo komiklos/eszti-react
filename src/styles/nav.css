@@ -1,6 +1,6 @@
 /* src/styles/nav.css */
 :root {
-    --nav-background-color: #e3c2ce;
+    --nav-background-color: #ffffff;
     --nav-link-color: #6b4f57;
     --nav-link-hover-color: #b56576;
     --current-link-color: #b56576;
@@ -18,10 +18,10 @@ html {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-top: 50px;
+    padding-top: 32px;
     background-color: var(--nav-background-color);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 8px 8px;
+    box-shadow: none; /* Remove shadows */
+    border-radius: 0; /* Remove border radius */
 }
 
 .felho {

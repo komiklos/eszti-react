@@ -17,8 +17,6 @@ export default function Nav() {
                 return "nav-category2";
             case "/category3":
                 return "nav-category3";
-            case "/shop":
-                return "nav-shop";
             case "/about":
                 return "nav-about";
             case "/links":
@@ -38,8 +36,6 @@ export default function Nav() {
                 return "category2";
             case "/category3":
                 return "category3";
-            case "/shop":
-                return "shop";
             case "/about":
                 return "about";
             case "/links":
@@ -102,7 +98,6 @@ export default function Nav() {
                             </div>
                         )}
                     </div>
-                    {renderNavLink("/shop", "nav-shop", "shop")}
                     {renderNavLink("/about", "nav-about", "about")}
                     {renderNavLink("/links", "nav-links", "links")}
                 </div>
