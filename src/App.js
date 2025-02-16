@@ -1,29 +1,30 @@
-// src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Nav from './nav/Nav';
-import Category1Gallery from './pages/portfolio/Category1Gallery';
-import Category2Gallery from './pages/portfolio/Category2Gallery';
-import Category3Gallery from './pages/portfolio/Category3Gallery';
-import About from "./pages/about/About.js";
-import Links from "./pages/links/Links.js";
-import './styles/app.css';
-import './firebase'; // Import Firebase initialization
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { auth } from './firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import AdminGate from './components/AdminGate';
+import CategoryNav from './components/CategoryNav';
+import Gallery from './components/Gallery';
+import UploadForm from './components/UploadForm';
 
-function App() {
+export default function App() {
+    const [user] = useAuthState(auth);
+
     return (
         <Router>
-            <Nav />
+            <CategoryNav />
+
             <Routes>
-                <Route path="/category1" element={<Category1Gallery />} />
-                <Route path="/category2" element={<Category2Gallery />} />
-                <Route path="/category3" element={<Category3Gallery />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/links" element={<Links />} />
-                <Route path="/" element={<Category1Gallery />} />
+                {/* Redirect root to default category */}
+                <Route path="/" element={<Navigate to="/kids-editorial" replace />} />
+
+                {/* Category gallery */}
+                <Route path="/:slug" element={<Gallery />} />
+
+                {/* Admin upload */}
+                <Route path="/admin" element={
+                    user ? <UploadForm /> : <AdminGate />
+                } />
             </Routes>
         </Router>
     );
 }
-
-export default App;
