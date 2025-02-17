@@ -5,25 +5,26 @@ import AdminGate from './components/AdminGate';
 import CategoryNav from './components/CategoryNav';
 import Gallery from './components/Gallery';
 import UploadForm from './components/UploadForm';
+import LoadingSpinner from './components/LoadingSpinner'; // Add a spinner component
+import NotFoundPage from './components/NotFoundPage'; // Add a spinner component
 
 export default function App() {
-    const [user] = useAuthState(auth);
+    const [user, loading, error] = useAuthState(auth);
+
+    if (loading) return <LoadingSpinner />;
+    if (error) return <div>Error: {error.message}</div>;
 
     return (
         <Router>
             <CategoryNav />
-
             <Routes>
-                {/* Redirect root to default category */}
                 <Route path="/" element={<Navigate to="/kids-editorial" replace />} />
-
-                {/* Category gallery */}
                 <Route path="/:slug" element={<Gallery />} />
-
-                {/* Admin upload */}
-                <Route path="/admin" element={
-                    user ? <UploadForm /> : <AdminGate />
-                } />
+                <Route
+                    path="/admin"
+                    element={user ? <UploadForm /> : <AdminGate />}
+                />
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Router>
     );
