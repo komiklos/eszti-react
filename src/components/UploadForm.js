@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { db, storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { collection, addDoc, doc, deleteDoc, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, doc, deleteDoc, onSnapshot, query, where, getDocs } from 'firebase/firestore';
 
 const CATEGORIES = [
     { slug: 'kids-editorial', displayName: 'Kids Editorial' },
@@ -18,32 +18,30 @@ export default function UploadForm() {
     const [existingImages, setExistingImages] = useState([]);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    // Check if a file exists in Firebase Storage
-    const checkImageExists = async (storagePath) => {
-        try {
-            const fileRef = ref(storage, storagePath);
-            await getDownloadURL(fileRef); // Throws error if file doesn't exist
-            return true;
-        } catch (error) {
-            return false;
-        }
-    };
-
     // Fetch images and filter out missing ones
     useEffect(() => {
         if (!selectedSlug) return;
 
         const unsubscribe = onSnapshot(
             collection(db, 'categories', selectedSlug, 'images'),
-            async (snapshot) => {
-                const images = await Promise.all(
-                    snapshot.docs.map(async (doc) => {
-                        const data = doc.data();
-                        const exists = await checkImageExists(data.storagePath);
-                        return exists ? { id: doc.id, ...data } : null;
-                    })
-                );
-                setExistingImages(images.filter(Boolean)); // Remove null values
+            (snapshot) => {
+                const images = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+
+                // Filter out duplicates based on document ID
+                const uniqueImages = [];
+                const seenIds = new Set();
+
+                images.forEach((image) => {
+                    if (!seenIds.has(image.id)) {
+                        seenIds.add(image.id);
+                        uniqueImages.push(image);
+                    }
+                });
+
+                setExistingImages(uniqueImages);
             }
         );
 
@@ -71,17 +69,34 @@ export default function UploadForm() {
     };
 
     const handleUpload = async () => {
+        console.log('handleUpload called'); // Debugging
         if (!selectedSlug || !files.length) return;
 
         setIsUploading(true);
         try {
             await Promise.all(files.map(async (file) => {
+                console.log('Uploading file:', file.name); // Debugging
                 const storagePath = `images/${selectedSlug}/${file.name}`;
                 const storageRef = ref(storage, storagePath);
 
+                // Check if a document with the same storagePath already exists
+                const snapshot = await getDocs(
+                    query(
+                        collection(db, 'categories', selectedSlug, 'images'),
+                        where('storagePath', '==', storagePath)
+                    )
+                );
+
+                if (!snapshot.empty) {
+                    console.warn(`File already exists: ${storagePath}`);
+                    return;
+                }
+
+                // Upload to Storage
                 await uploadBytes(storageRef, file);
                 const url = await getDownloadURL(storageRef);
 
+                // Add document to Firestore
                 await addDoc(collection(db, 'categories', selectedSlug, 'images'), {
                     url,
                     storagePath,
