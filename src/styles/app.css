@@ -1,15 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 @import "tailwindcss";
 
+/*html {*/
+/*    background-color: #ffffff; !* same as body background color *!*/
+/*}*/
 
-html {
-    background-color: #ffffff; /* same as body background color */
+/*body {*/
+/*    font-family: sans-serif;*/
+/*    color: white;*/
+/*    background-color: #ffffff; !* off-white background color *!*/
+/*    -webkit-tap-highlight-color: transparent;*/
+/*}*/
+
+/*!* Custom transitions *!*/
+/*.transition-all {*/
+/*    transition-property: all;*/
+/*}*/
+
+/* Smooth transitions */
+.transition-colors {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
 }
 
-body {
-    font-family: sans-serif;
-    color: white;
-    background-color: #ffffff; /* off-white background color */
-    -webkit-tap-highlight-color: transparent;
+/* Dropdown animation */
+.transition-all {
+    transition-property: all;
 }
-

@@ -7,12 +7,24 @@ export default function AdminGate({ children }) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
+    // AdminGate.js - Add detailed error logging
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-        } catch (err) {
-            setError('Invalid email or password');
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log('Login success:', userCredential.user);
+        } catch (error) {
+            console.error('Full error object:', error);
+            let message = error.message;
+
+            // Specific error codes
+            if (error.code === 'auth/invalid-credential') {
+                message = 'Invalid email/password combination';
+            } else if (error.code === 'auth/too-many-requests') {
+                message = 'Account temporarily locked - try again later';
+            }
+
+            setError(message);
         }
     };
 

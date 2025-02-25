@@ -1,9 +1,21 @@
 module.exports = {
     content: [
-        './src/**/*.{js,jsx,ts,tsx}', // Ensure this includes your component paths
+        "./src/**/*.{js,jsx,ts,tsx}",
+        "./public/index.html"
     ],
     theme: {
-        extend: {},
+        extend: {
+            transitionProperty: {
+                'visibility': 'visibility',
+                'opacity': 'opacity'
+            }
+        },
+    },
+    variants: {
+        extend: {
+            visibility: ["group-hover"],
+            opacity: ["group-hover"]
+        }
     },
     plugins: [],
 }

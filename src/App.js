@@ -5,8 +5,10 @@ import AdminGate from './components/AdminGate';
 import CategoryNav from './components/CategoryNav';
 import Gallery from './components/Gallery';
 import UploadForm from './components/UploadForm';
-import LoadingSpinner from './components/LoadingSpinner'; // Add a spinner component
-import NotFoundPage from './components/NotFoundPage'; // Add a spinner component
+import LoadingSpinner from './components/LoadingSpinner';
+import NotFoundPage from './components/NotFoundPage';
+import './styles/app.css';
+
 
 export default function App() {
     const [user, loading, error] = useAuthState(auth);
@@ -16,15 +18,15 @@ export default function App() {
 
     return (
         <Router>
-            <CategoryNav />
+            <CategoryNav/>
             <Routes>
-                <Route path="/" element={<Navigate to="/kids-editorial" replace />} />
-                <Route path="/:slug" element={<Gallery />} />
+                <Route path="/" element={<Navigate to="/kids-editorial" replace/>}/>
+                <Route path="/:slug" element={<Gallery/>}/>
                 <Route
                     path="/admin"
-                    element={user ? <UploadForm /> : <AdminGate />}
+                    element={user ? <UploadForm/> : <AdminGate/>}
                 />
-                <Route path="*" element={<NotFoundPage />} />
+                <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
         </Router>
     );
