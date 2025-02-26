@@ -1,10 +1,12 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// App.js
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import AdminGate from './components/AdminGate';
+import UploadForm from './components/UploadForm';
 import CategoryNav from './components/CategoryNav';
 import Gallery from './components/Gallery';
-import UploadForm from './components/UploadForm';
+import AllCategoriesGallery from './components/AllCategoriesGallery';
 import LoadingSpinner from './components/LoadingSpinner';
 import NotFoundPage from './components/NotFoundPage';
 import './styles/app.css';
@@ -18,15 +20,15 @@ export default function App() {
 
     return (
         <Router>
-            <CategoryNav/>
+            <CategoryNav />
             <Routes>
-                <Route path="/" element={<Navigate to="/kids-editorial" replace/>}/>
-                <Route path="/:slug" element={<Gallery/>}/>
+                <Route path="/" element={<AllCategoriesGallery />} />
+                <Route path="/:slug" element={<Gallery />} />
                 <Route
                     path="/admin"
-                    element={user ? <UploadForm/> : <AdminGate/>}
+                    element={user ? <UploadForm /> : <AdminGate />}
                 />
-                <Route path="*" element={<NotFoundPage/>}/>
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Router>
     );

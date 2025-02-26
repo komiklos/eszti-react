@@ -1,71 +1,92 @@
-import React, { useEffect, useState } from 'react';
+// components/Gallery.js
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db, storage } from '../firebase';
-import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
-import MasonryGallery from './gallery/MasonryGallery';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function Gallery() {
-    const { slug } = useParams(); // Get slug from URL
+    const { slug } = useParams();
+    const [category, setCategory] = useState(null);
     const [images, setImages] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Check if a file exists in Firebase Storage
-    const checkImageExists = async (storagePath) => {
-        try {
-            const fileRef = ref(storage, storagePath);
-            await getDownloadURL(fileRef); // Throws error if file doesn't exist
-            return true;
-        } catch (error) {
-            return false;
-        }
-    };
-
-    // Fetch images and filter out missing ones
     useEffect(() => {
-        const fetchImages = async () => {
-            if (!slug) return;
-
-            setIsLoading(true);
+        const fetchCategoryData = async () => {
             try {
-                const snapshot = await getDocs(
-                    collection(db, 'categories', slug, 'images')
-                );
+                setLoading(true);
 
-                // Check each image and filter out missing files
-                const validImages = await Promise.all(
-                    snapshot.docs.map(async (doc) => {
-                        const data = doc.data();
-                        const exists = await checkImageExists(data.storagePath);
-                        return exists ? { id: doc.id, ...data } : null;
+                // 1. Find category by slug
+                const categoriesQuery = query(
+                    collection(db, 'categories'),
+                    where('slug', '==', slug)
+                );
+                const categoriesSnapshot = await getDocs(categoriesQuery);
+
+                if (categoriesSnapshot.empty) {
+                    throw new Error(`Category '${slug}' not found`);
+                }
+
+                const categoryDoc = categoriesSnapshot.docs[0];
+                const categoryData = categoryDoc.data();
+                setCategory({
+                    id: categoryDoc.id,
+                    ...categoryData
+                });
+
+                // 2. Fetch category images
+                const imagesRef = collection(db, 'categories', categoryDoc.id, 'images');
+                const imagesSnapshot = await getDocs(imagesRef);
+
+                const imagesWithUrls = await Promise.all(
+                    imagesSnapshot.docs.map(async (doc) => {
+                        const imageData = doc.data();
+                        const url = await getDownloadURL(ref(storage, imageData.storagePath));
+                        return {
+                            id: doc.id,
+                            ...imageData,
+                            url
+                        };
                     })
                 );
 
-                // Remove null values (images with missing files)
-                setImages(validImages.filter(Boolean));
-            } catch (error) {
-                console.error('Error fetching images:', error);
-            } finally {
-                setIsLoading(false);
+                setImages(imagesWithUrls);
+                setLoading(false);
+            } catch (err) {
+                console.error('Failed to load gallery:', err);
+                setError(err);
+                setLoading(false);
             }
         };
 
-        fetchImages();
+        fetchCategoryData();
     }, [slug]);
 
-    if (!slug) return <div>Select a category</div>;
+    if (loading) return <LoadingSpinner />;
 
-    if (isLoading) return <div>Loading images...</div>;
+    if (error) return (
+        <div className="p-8 text-center text-red-600">
+            Error loading gallery: {error.message}
+        </div>
+    );
 
     return (
-        <div className="p-4">
-            <MasonryGallery
-                images={images.map(img => ({
-                    url: img.url,
-                    alt: img.title || `Artwork ${img.id}`,
-                    id: img.id
-                }))}
-            />
+        <div className="p-8">
+            <h1 className="text-3xl font-bold mb-8 text-gray-800">{category.displayName}</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {images.map((image) => (
+                    <div key={image.id} className="relative group">
+                        <img
+                            src={image.url}
+                            alt={image.description || category.displayName}
+                            className="w-full h-64 object-cover rounded-lg shadow-lg"
+                            loading="lazy"
+                        />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
