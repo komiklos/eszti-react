@@ -5,6 +5,7 @@ import { db, storage } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import LoadingSpinner from './LoadingSpinner';
+import MasonryGallery from './gallery/MasonryGallery';
 
 export default function Gallery() {
     const { slug } = useParams();
@@ -18,7 +19,7 @@ export default function Gallery() {
             try {
                 setLoading(true);
 
-                // 1. Find category by slug
+                // Find category by slug
                 const categoriesQuery = query(
                     collection(db, 'categories'),
                     where('slug', '==', slug)
@@ -31,12 +32,9 @@ export default function Gallery() {
 
                 const categoryDoc = categoriesSnapshot.docs[0];
                 const categoryData = categoryDoc.data();
-                setCategory({
-                    id: categoryDoc.id,
-                    ...categoryData
-                });
+                setCategory({ id: categoryDoc.id, ...categoryData });
 
-                // 2. Fetch category images
+                // Fetch images
                 const imagesRef = collection(db, 'categories', categoryDoc.id, 'images');
                 const imagesSnapshot = await getDocs(imagesRef);
 
@@ -46,17 +44,18 @@ export default function Gallery() {
                         const url = await getDownloadURL(ref(storage, imageData.storagePath));
                         return {
                             id: doc.id,
-                            ...imageData,
-                            url
+                            url,
+                            alt: imageData.description || categoryData.displayName,
+                            caption: imageData.description || '',
                         };
                     })
                 );
 
                 setImages(imagesWithUrls);
-                setLoading(false);
             } catch (err) {
                 console.error('Failed to load gallery:', err);
                 setError(err);
+            } finally {
                 setLoading(false);
             }
         };
@@ -66,27 +65,17 @@ export default function Gallery() {
 
     if (loading) return <LoadingSpinner />;
 
-    if (error) return (
-        <div className="p-8 text-center text-red-600">
-            Error loading gallery: {error.message}
-        </div>
-    );
+    if (error)
+        return (
+            <div className="p-8 text-center text-red-600">
+                Error loading gallery: {error.message}
+            </div>
+        );
 
     return (
         <div className="p-8">
             <h1 className="text-3xl font-bold mb-8 text-gray-800">{category.displayName}</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {images.map((image) => (
-                    <div key={image.id} className="relative group">
-                        <img
-                            src={image.url}
-                            alt={image.description || category.displayName}
-                            className="w-full h-64 object-cover rounded-lg shadow-lg"
-                            loading="lazy"
-                        />
-                    </div>
-                ))}
-            </div>
+            <MasonryGallery images={images} />
         </div>
     );
 }

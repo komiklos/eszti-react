@@ -1,10 +1,10 @@
 // components/FeaturedGallery.js
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { db, storage } from '../firebase';
 import { collection, getDocs, query, orderBy, doc, getDoc } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import LoadingSpinner from './LoadingSpinner';
+import MasonryGallery from './gallery/MasonryGallery';
 
 export default function FeaturedGallery() {
     const [featuredImages, setFeaturedImages] = useState([]);
@@ -12,89 +12,62 @@ export default function FeaturedGallery() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchFeatured = async () => {
+        const fetchFeaturedImages = async () => {
             try {
-                // 1. Get featured items from Firestore
-                const q = query(collection(db, 'featured'), orderBy('createdAt', 'desc'));
-                const featuredSnapshot = await getDocs(q);
+                setLoading(true);
 
-                // 2. Get linked image data
-                const images = await Promise.all(
-                    featuredSnapshot.docs.map(async (featuredDoc) => {
-                        try {
-                            const { categoryId, imageId } = featuredDoc.data();
+                // Get featured items ordered by creation date
+                const featuredQuery = query(collection(db, 'featured'), orderBy('createdAt', 'desc'));
+                const featuredSnapshot = await getDocs(featuredQuery);
 
-                            // Create document reference properly
-                            const imageRef = doc(db, 'categories', categoryId, 'images', imageId);
-                            const imageDoc = await getDoc(imageRef);
+                // Fetch linked image data
+                const imagesData = await Promise.all(
+                    featuredSnapshot.docs.map(async (docSnap) => {
+                        const { categoryId, imageId } = docSnap.data();
 
-                            if (!imageDoc.exists()) {
-                                console.warn(`Image ${imageId} not found in category ${categoryId}`);
-                                return null;
-                            }
+                        // Fetch original image document
+                        const imageDocRef = doc(db, 'categories', categoryId, 'images', imageId);
+                        const imageDocSnap = await getDoc(imageDocRef);
 
-                            const imageData = imageDoc.data();
-                            const url = await getDownloadURL(ref(storage, imageData.storagePath));
+                        if (!imageDocSnap.exists()) return null;
 
-                            return {
-                                id: featuredDoc.id,
-                                url,
-                                ...imageData,
-                                categoryId
-                            };
-                        } catch (err) {
-                            console.error('Error processing featured item:', err);
-                            return null;
-                        }
+                        const imageData = imageDocSnap.data();
+                        const imageUrl = await getDownloadURL(ref(storage, imageData.storagePath));
+
+                        return {
+                            id: docSnap.id,
+                            url: imageUrl,
+                            alt: imageData.description || '',
+                            caption: imageData.description || '',
+                        };
                     })
                 );
 
-                // Filter out null values from failed fetches
-                setFeaturedImages(images.filter(img => img !== null));
-                setLoading(false);
+                setFeaturedImages(imagesData.filter(Boolean));
             } catch (err) {
-                console.error('Error loading featured images:', err);
+                console.error('Error fetching featured images:', err);
                 setError(err);
+            } finally {
                 setLoading(false);
             }
         };
 
-        fetchFeatured();
+        fetchFeaturedImages();
     }, []);
 
     if (loading) return <LoadingSpinner />;
 
-    if (error) return (
-        <div className="p-8 text-center text-red-600">
-            Error loading featured images: {error.message}
-        </div>
-    );
+    if (error)
+        return (
+            <div className="p-8 text-center text-red-600">
+                Error loading featured images: {error.message}
+            </div>
+        );
 
     return (
         <div className="p-8">
             <h1 className="text-3xl font-bold mb-8 text-gray-800">Featured Works</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {featuredImages.map((img) => (
-                    <Link
-                        key={img.id}
-                        to={`/${img.categoryId}`}
-                        className="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-                    >
-                        <img
-                            src={img.url}
-                            alt={img.description || 'Featured work'}
-                            className="w-full h-64 object-cover"
-                            loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all" />
-                        {img.description && (
-                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-                                <p className="text-white text-sm">{img.description}</p>
-                            </div>
-                        )}
-                    </Link>
-                ))}
-            </div>
+            <MasonryGallery images={featuredImages} />
         </div>
     );
 }

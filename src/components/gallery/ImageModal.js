@@ -35,10 +35,10 @@ const ImageModal = ({ isOpen, image, onClose }) => {
                     </svg>
                 </button>
 
-                {/* Image Container */}
-                <div className="relative h-full w-full rounded-lg overflow-hidden">
+                {/* Image Container with White Background */}
+                <div className="relative h-full w-full rounded-lg overflow-hidden bg-white">
                     <img
-                        src={image.url}  // Changed from image to image.url
+                        src={image.url} // Changed from image to image.url
                         alt={image.alt || "Artwork preview"}
                         className="object-contain max-h-[80vh] w-full rounded-lg"
                         loading="eager"
