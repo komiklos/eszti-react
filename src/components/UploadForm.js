@@ -1,3 +1,4 @@
+// components/UploadForm.js
 import { useState, useEffect } from 'react';
 import { db, storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
@@ -18,7 +19,6 @@ export default function UploadForm() {
     const [existingImages, setExistingImages] = useState([]);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    // Fetch images and filter out missing ones
     useEffect(() => {
         if (!selectedSlug) return;
 
@@ -30,7 +30,6 @@ export default function UploadForm() {
                     ...doc.data()
                 }));
 
-                // Filter out duplicates based on document ID
                 const uniqueImages = [];
                 const seenIds = new Set();
 
@@ -48,18 +47,29 @@ export default function UploadForm() {
         return () => unsubscribe();
     }, [selectedSlug]);
 
+    const handleFeature = async (imageId) => {
+        if (!window.confirm('Add this image to featured collection?')) return;
+
+        try {
+            await addDoc(collection(db, 'featured'), {
+                categoryId: selectedSlug,
+                imageId: imageId,
+                createdAt: new Date()
+            });
+            alert('Image added to featured collection!');
+        } catch (error) {
+            alert('Failed to feature image: ' + error.message);
+        }
+    };
+
     const handleDelete = async (imageId, storagePath) => {
         if (!window.confirm('Are you sure you want to delete this image?')) return;
 
         setIsDeleting(true);
         try {
-            // Delete Firestore document
             await deleteDoc(doc(db, 'categories', selectedSlug, 'images', imageId));
-
-            // Delete file from Storage
             const fileRef = ref(storage, storagePath);
             await deleteObject(fileRef);
-
             alert('Image deleted successfully!');
         } catch (error) {
             alert('Delete failed: ' + error.message);
@@ -69,17 +79,14 @@ export default function UploadForm() {
     };
 
     const handleUpload = async () => {
-        console.log('handleUpload called'); // Debugging
         if (!selectedSlug || !files.length) return;
 
         setIsUploading(true);
         try {
             await Promise.all(files.map(async (file) => {
-                console.log('Uploading file:', file.name); // Debugging
                 const storagePath = `images/${selectedSlug}/${file.name}`;
                 const storageRef = ref(storage, storagePath);
 
-                // Check if a document with the same storagePath already exists
                 const snapshot = await getDocs(
                     query(
                         collection(db, 'categories', selectedSlug, 'images'),
@@ -92,11 +99,9 @@ export default function UploadForm() {
                     return;
                 }
 
-                // Upload to Storage
                 await uploadBytes(storageRef, file);
                 const url = await getDownloadURL(storageRef);
 
-                // Add document to Firestore
                 await addDoc(collection(db, 'categories', selectedSlug, 'images'), {
                     url,
                     storagePath,
@@ -118,7 +123,6 @@ export default function UploadForm() {
         <div className="max-w-2xl mx-auto p-4 bg-white rounded-lg shadow-md">
             <h2 className="text-xl font-bold mb-4">Image Manager</h2>
 
-            {/* Category Selector */}
             <select
                 value={selectedSlug}
                 onChange={(e) => setSelectedSlug(e.target.value)}
@@ -131,7 +135,6 @@ export default function UploadForm() {
                 ))}
             </select>
 
-            {/* Upload Section */}
             <div className="mb-8 p-4 border rounded">
                 <h3 className="text-lg font-semibold mb-4">Upload New Images</h3>
                 <input
@@ -152,7 +155,6 @@ export default function UploadForm() {
                 </button>
             </div>
 
-            {/* Existing Images Section */}
             {selectedSlug && (
                 <div className="p-4 border rounded">
                     <h3 className="text-lg font-semibold mb-4">
@@ -166,14 +168,22 @@ export default function UploadForm() {
                                     alt="Uploaded content"
                                     className="w-full h-32 object-cover rounded"
                                 />
-                                <button
-                                    onClick={() => handleDelete(image.id, image.storagePath)}
-                                    disabled={isDeleting}
-                                    className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full
-                                    opacity-0 group-hover:opacity-100 transition-opacity"
-                                >
-                                    ✕
-                                </button>
+                                <div className="absolute top-1 right-1 flex gap-1">
+                                    <button
+                                        onClick={() => handleFeature(image.id)}
+                                        className="p-1 bg-green-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                        title="Feature this image"
+                                    >
+                                        ★
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(image.id, image.storagePath)}
+                                        className="p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                        title="Delete this image"
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
                                 <div className="text-xs text-gray-600 mt-1 truncate">
                                     {image.fileName || 'untitled'}
                                 </div>

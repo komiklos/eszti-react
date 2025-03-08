@@ -9,6 +9,7 @@ import Gallery from './components/Gallery';
 import AllCategoriesGallery from './components/AllCategoriesGallery';
 import LoadingSpinner from './components/LoadingSpinner';
 import NotFoundPage from './components/NotFoundPage';
+import FeaturedGallery from './components/FeaturedGallery';
 import './styles/app.css';
 
 
@@ -22,7 +23,8 @@ export default function App() {
         <Router>
             <CategoryNav />
             <Routes>
-                <Route path="/" element={<AllCategoriesGallery />} />
+                <Route path="/" element={<FeaturedGallery />} />
+                <Route path="/all-categories" element={<AllCategoriesGallery />} />
                 <Route path="/:slug" element={<Gallery />} />
                 <Route
                     path="/admin"

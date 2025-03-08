@@ -15,13 +15,13 @@ export default function CategoryNav() {
 
             {/* My Work Link */}
             <NavLink
-                to="/"
+                to="/all-categories"
                 className={({ isActive }) =>
                     `text-gray-600 transition-colors text-lg
-                     ${isActive ? 'text-blue-600 font-bold' : 'hover:text-blue-300'}`
+         ${isActive ? 'text-blue-600 font-bold' : 'hover:text-blue-300'}`
                 }
             >
-                My Work
+                All Categories
             </NavLink>
 
             {/* Regular Links */}
