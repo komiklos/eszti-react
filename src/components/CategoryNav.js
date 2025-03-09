@@ -21,7 +21,7 @@ export default function CategoryNav() {
          ${isActive ? 'text-blue-600 font-bold' : 'hover:text-blue-300'}`
                 }
             >
-                All Categories
+                Categories
             </NavLink>
 
             {/* Regular Links */}
