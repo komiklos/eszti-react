@@ -6,7 +6,6 @@ import ImageModal from './ImageModal';
 const MasonryGallery = ({ images }) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
-    // Handle full image object for modal
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
@@ -36,12 +35,14 @@ const MasonryGallery = ({ images }) => {
                         className="mb-4 group relative cursor-zoom-in"
                         onClick={() => handleImageClick(image)}
                     >
-                        <img
-                            src={image.url}
-                            alt={image.alt || `Artwork ${index + 1}`}
-                            className="w-full rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-95"
-                            loading="lazy"
-                        />
+                        <div className="aspect-ratio-box">
+                            <img
+                                src={image.url}
+                                alt={image.alt || `Artwork ${index + 1}`}
+                                className="w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-95"
+                                loading="lazy"
+                            />
+                        </div>
 
                         {/* Optional caption overlay */}
                         {image.caption && (

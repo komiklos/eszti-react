@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import { db, storage } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
-import LoadingSpinner from './LoadingSpinner';
 import MasonryGallery from './gallery/MasonryGallery';
+import GallerySkeletonLoader from './GallerySkeletonLoader';
 
 export default function Gallery() {
     const { slug } = useParams();
@@ -63,7 +63,7 @@ export default function Gallery() {
         fetchCategoryData();
     }, [slug]);
 
-    if (loading) return <LoadingSpinner />;
+    if (loading) return <GallerySkeletonLoader />;
 
     if (error)
         return (

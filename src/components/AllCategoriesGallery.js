@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { db, storage } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
-import LoadingSpinner from './LoadingSpinner';
 import ImageModal from './gallery/ImageModal';
+import GallerySkeletonLoader from "./GallerySkeletonLoader";
 
 export default function AllCategoriesGallery() {
     const [categoryPreviews, setCategoryPreviews] = useState([]);
@@ -39,7 +39,7 @@ export default function AllCategoriesGallery() {
         fetchCategoryPreviews();
     }, []);
 
-    if (loading) return <LoadingSpinner />;
+    if (loading) return <GallerySkeletonLoader />;
 
     const handleImageClick = (imageUrl, altText) => {
         setModalImage({ url: imageUrl, alt: altText });
@@ -48,10 +48,10 @@ export default function AllCategoriesGallery() {
 
     return (
         <div className="p-8">
-            <h1 className="text-3xl font-bold mb-8 text-gray-800">All Categories</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {categoryPreviews.map((cat) => (
-                    <div key={cat.id} className="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                    <div key={cat.id} className="group relative block overflow-hidden hover:shadow-xl transition-shadow">
+                        {/* Thumbnail */}
                         {cat.thumbnail ? (
                             <img
                                 src={cat.thumbnail}
@@ -65,11 +65,13 @@ export default function AllCategoriesGallery() {
                                 <span className="text-gray-500">No images yet</span>
                             </div>
                         )}
+
+                        {/* Title Below Thumbnail */}
+                        <h2 className="text-black text-xl font-semibold mt-2">{cat.displayName}</h2>
+
+                        {/* Overlay for Link */}
                         <Link to={`/${cat.slug}`}>
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all" />
-                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-                                <h2 className="text-white text-xl font-semibold">{cat.displayName}</h2>
-                            </div>
                         </Link>
                     </div>
                 ))}

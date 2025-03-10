@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { db, storage } from '../firebase';
 import { collection, getDocs, query, orderBy, doc, getDoc } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
-import LoadingSpinner from './LoadingSpinner';
+import GallerySkeletonLoader from './GallerySkeletonLoader';
 import MasonryGallery from './gallery/MasonryGallery';
 
 export default function FeaturedGallery() {
@@ -55,7 +55,7 @@ export default function FeaturedGallery() {
         fetchFeaturedImages();
     }, []);
 
-    if (loading) return <LoadingSpinner />;
+    if (loading) return <GallerySkeletonLoader />;
 
     if (error)
         return (
@@ -66,7 +66,6 @@ export default function FeaturedGallery() {
 
     return (
         <div className="p-8">
-            <h1 className="text-3xl font-bold mb-8 text-gray-800">Featured Works</h1>
             <MasonryGallery images={featuredImages} />
         </div>
     );

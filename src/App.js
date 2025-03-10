@@ -10,8 +10,9 @@ import AllCategoriesGallery from './components/AllCategoriesGallery';
 import LoadingSpinner from './components/LoadingSpinner';
 import NotFoundPage from './components/NotFoundPage';
 import FeaturedGallery from './components/FeaturedGallery';
+import About from './components/About';
+import Footer from './components/Footer';
 import './styles/app.css';
-
 
 export default function App() {
     const [user, loading, error] = useAuthState(auth);
@@ -25,6 +26,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<FeaturedGallery />} />
                 <Route path="/all-categories" element={<AllCategoriesGallery />} />
+                <Route path="/about" element={<About />} />
                 <Route path="/:slug" element={<Gallery />} />
                 <Route
                     path="/admin"
@@ -32,6 +34,7 @@ export default function App() {
                 />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }
