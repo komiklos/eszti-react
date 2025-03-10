@@ -17,8 +17,7 @@ const MasonryGallery = ({ images }) => {
     // Responsive column configuration
     const breakpointColumns = {
         default: 3,
-        1024: 3,
-        768: 2,
+        1280: 2,
         640: 1
     };
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { db, storage } from '../firebase';
 import { collection, getDocs, query, orderBy, doc, getDoc } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
-import GallerySkeletonLoader from './GallerySkeletonLoader';
+import MasonrySkeletonLoader from './MasonrySkeletonLoader';
 import MasonryGallery from './gallery/MasonryGallery';
 
 export default function FeaturedGallery() {
@@ -55,7 +55,7 @@ export default function FeaturedGallery() {
         fetchFeaturedImages();
     }, []);
 
-    if (loading) return <GallerySkeletonLoader />;
+    if (loading) return <MasonrySkeletonLoader />;
 
     if (error)
         return (

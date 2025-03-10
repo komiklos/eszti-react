@@ -5,7 +5,7 @@ import { db, storage } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import MasonryGallery from './gallery/MasonryGallery';
-import GallerySkeletonLoader from './GallerySkeletonLoader';
+import MasonrySkeletonLoader from './MasonrySkeletonLoader';
 
 export default function Gallery() {
     const { slug } = useParams();
@@ -63,7 +63,7 @@ export default function Gallery() {
         fetchCategoryData();
     }, [slug]);
 
-    if (loading) return <GallerySkeletonLoader />;
+    if (loading) return <MasonrySkeletonLoader />;
 
     if (error)
         return (

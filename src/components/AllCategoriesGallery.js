@@ -5,7 +5,7 @@ import { db, storage } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import ImageModal from './gallery/ImageModal';
-import GallerySkeletonLoader from "./GallerySkeletonLoader";
+import AllCategoriesSkeletonLoader from "./AllCategoriesSkeletonLoader";
 
 export default function AllCategoriesGallery() {
     const [categoryPreviews, setCategoryPreviews] = useState([]);
@@ -39,7 +39,7 @@ export default function AllCategoriesGallery() {
         fetchCategoryPreviews();
     }, []);
 
-    if (loading) return <GallerySkeletonLoader />;
+    if (loading) return <AllCategoriesSkeletonLoader />;
 
     const handleImageClick = (imageUrl, altText) => {
         setModalImage({ url: imageUrl, alt: altText });
