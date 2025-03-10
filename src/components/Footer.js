@@ -9,7 +9,7 @@ export default function Footer() {
                 {/* Social Media Icons */}
                 <div className="flex gap-6">
                     <a
-                        href="https://instagram.com/yourusername"
+                        href="https://isdfdsnstagram.com/yourusername"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-blue-500 transition-colors"
