@@ -38,7 +38,7 @@ const MasonryGallery = ({ images }) => {
                             <img
                                 src={image.url}
                                 alt={image.alt || `Artwork ${index + 1}`}
-                                className="w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-95"
+                                className="w-full h-full object-cover shadow-lg transition-transform duration-300 group-hover:scale-95"
                                 loading="lazy"
                             />
                         </div>

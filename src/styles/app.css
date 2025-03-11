@@ -1,22 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 @import "tailwindcss";
 
-/*html {*/
-/*    background-color: #ffffff; !* same as body background color *!*/
-/*}*/
-
-/*body {*/
-/*    font-family: sans-serif;*/
-/*    color: white;*/
-/*    background-color: #ffffff; !* off-white background color *!*/
-/*    -webkit-tap-highlight-color: transparent;*/
-/*}*/
-
-/*!* Custom transitions *!*/
-/*.transition-all {*/
-/*    transition-property: all;*/
-/*}*/
-
 /* Smooth transitions */
 .transition-colors {
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
@@ -32,9 +16,8 @@
 .aspect-ratio-box {
     position: relative;
     width: 100%;
-    padding-bottom: 66%; /* This creates a 1:1 aspect ratio (square) */
+    padding-bottom: 66%;
     overflow: hidden;
-    border-radius: 0.5rem; /* Adjust as needed */
 }
 
 .aspect-ratio-box img {

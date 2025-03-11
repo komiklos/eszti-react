@@ -51,20 +51,22 @@ export default function AllCategoriesGallery() {
 
     return (
         <div className="p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {categoryPreviews.map((cat) => (
-                    <div key={cat.id} className="group relative block overflow-hidden hover:shadow-xl transition-shadow">
+                    <div key={cat.id} className="group relative block overflow-hidden transition-shadow">
                         {/* Thumbnail */}
                         {cat.thumbnail ? (
-                            <img
-                                src={cat.thumbnail}
-                                alt={cat.displayName}
-                                className="w-full h-64 object-cover cursor-pointer"
-                                onClick={() => handleImageClick(cat.thumbnail, cat.displayName)}
-                                loading="lazy"
-                            />
+                            <div className="relative aspect-ratio-box">
+                                <img
+                                    src={cat.thumbnail}
+                                    alt={cat.displayName}
+                                    className="w-full h-full object-cover cursor-pointer"
+                                    onClick={() => handleImageClick(cat.thumbnail, cat.displayName)}
+                                    loading="lazy"
+                                />
+                            </div>
                         ) : (
-                            <div className="w-full h-64 bg-gray-100 flex items-center justify-center">
+                            <div className="aspect-ratio-box bg-gray-100 flex items-center justify-center">
                                 <span className="text-gray-500">No images yet</span>
                             </div>
                         )}
@@ -74,7 +76,7 @@ export default function AllCategoriesGallery() {
 
                         {/* Overlay for Link */}
                         <Link to={`/${cat.slug}`}>
-                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all" />
+                            <div className="absolute inset-0 bg-black bg-opacity-0 transition-all" />
                         </Link>
                     </div>
                 ))}
