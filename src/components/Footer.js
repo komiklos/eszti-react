@@ -4,7 +4,7 @@ import { FaInstagram, FaFacebook, FaLinkedin } from 'react-icons/fa'; // Install
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-100 py-6 mt-12">
+        <footer className="bg-gray-100 pt-12 pb-24 mt-12">
             <div className="container mx-auto px-8 flex flex-col items-center gap-4">
                 {/* Social Media Icons */}
                 <div className="flex gap-6">
@@ -36,7 +36,7 @@ export default function Footer() {
 
                 {/* Signature */}
                 <p className="text-gray-600 text-sm">
-                    © 2025 Eszti Kondász. All rights reserved.
+                    © 2025 Kondász Eszter. All rights reserved.
                 </p>
             </div>
         </footer>

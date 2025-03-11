@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import logo from "../assets/eszti_logo.png";
 
-export default function CategoryNav() {
+export default function NavBar() {
     return (
         <nav className="flex items-center gap-8 px-8 py-6 border-b border-gray-100">
             {/* Logo */}
@@ -57,17 +57,6 @@ export default function CategoryNav() {
                     Contact
                 </NavLink>
             </div>
-
-            {/* Admin Link */}
-            <NavLink
-                to="/admin"
-                className={({ isActive }) =>
-                    `ml-auto text-red-500 transition-colors font-bold text-lg
-                     ${isActive ? 'text-red-600' : 'hover:text-red-400'}`
-                }
-            >
-                Admin
-            </NavLink>
         </nav>
     );
 }

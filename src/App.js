@@ -4,7 +4,7 @@ import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import AdminGate from './components/AdminGate';
 import UploadForm from './components/UploadForm';
-import CategoryNav from './components/CategoryNav';
+import NavBar from './components/NavBar';
 import Gallery from './components/Gallery';
 import AllCategoriesGallery from './components/AllCategoriesGallery';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -29,7 +29,7 @@ export default function App() {
 
     return (
         <Router>
-            <CategoryNav />
+            <NavBar />
             <Routes>
                 <Route path="/" element={<FeaturedGallery />} />
                 <Route path="/all-categories" element={<AllCategoriesGallery />} />
