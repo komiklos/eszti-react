@@ -26,7 +26,10 @@ export default function AllCategoriesGallery() {
                     if (imagesSnapshot.empty) return { id: doc.id, ...categoryData, thumbnail: null };
 
                     const firstImage = imagesSnapshot.docs[0].data();
-                    const thumbnailUrl = await getDownloadURL(ref(storage, firstImage.storagePath));
+                    const thumbnailRef = ref(storage, firstImage.storagePath);
+
+                    // Generate a signed URL for the thumbnail
+                    const thumbnailUrl = await getDownloadURL(thumbnailRef);
 
                     return { id: doc.id, ...categoryData, thumbnail: thumbnailUrl };
                 })

@@ -9,7 +9,7 @@ export default function Footer() {
                 {/* Social Media Icons */}
                 <div className="flex gap-6">
                     <a
-                        href="https://isdfdsnstagram.com/yourusername"
+                        href="https://www.instagram.com/kondaszeszti/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-blue-500 transition-colors"
@@ -17,7 +17,7 @@ export default function Footer() {
                         <FaInstagram size={24} />
                     </a>
                     <a
-                        href="https://facebook.com/yourusername"
+                        href="https://www.facebook.com/kondaase"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-blue-500 transition-colors"
@@ -25,7 +25,7 @@ export default function Footer() {
                         <FaFacebook size={24} />
                     </a>
                     <a
-                        href="https://linkedin.com/in/yourusername"
+                        href="https://www.linkedin.com/in/kondaszeszti/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-blue-500 transition-colors"

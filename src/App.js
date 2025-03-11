@@ -20,6 +20,13 @@ export default function App() {
     if (loading) return <LoadingSpinner />;
     if (error) return <div>Error: {error.message}</div>;
 
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    });
+
     return (
         <Router>
             <CategoryNav />
