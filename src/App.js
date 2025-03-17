@@ -13,6 +13,7 @@ import FeaturedGallery from './components/FeaturedGallery';
 import About from './components/About';
 import Footer from './components/Footer';
 import './styles/app.css';
+import Contact from "./components/Contact";
 
 export default function App() {
     const [user, loading, error] = useAuthState(auth);
@@ -34,6 +35,7 @@ export default function App() {
                 <Route path="/" element={<FeaturedGallery />} />
                 <Route path="/all-categories" element={<AllCategoriesGallery />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/:slug" element={<Gallery />} />
                 <Route
                     path="/admin"
