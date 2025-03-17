@@ -1,5 +1,6 @@
 // components/gallery/ImageModal.js
 import React from 'react';
+import ImageViewer from 'react-simple-image-viewer';
 
 const ImageModal = ({ isOpen, image, onClose }) => {
     if (!isOpen || !image) return null;
@@ -35,21 +36,21 @@ const ImageModal = ({ isOpen, image, onClose }) => {
                     </svg>
                 </button>
 
-                {/* Image Container with White Background */}
-                <div className="relative h-full w-full rounded-lg overflow-hidden bg-white">
-                    <img
-                        src={image.url} // Changed from image to image.url
-                        alt={image.alt || "Artwork preview"}
-                        className="object-contain max-h-[80vh] w-full rounded-lg"
-                        loading="eager"
-                    />
+                {/* Image Viewer */}
+                <ImageViewer
+                    src={[image.url]} // Pass the image URL as an array
+                    currentIndex={0} // Always show the first image
+                    onClose={onClose}
+                    backgroundStyle={{
+                        backgroundColor: 'rgba(0,0,0,0.9)',
+                    }}
+                    closeOnClickOutside={true}
+                />
 
-                    {/* Optional Caption */}
-                    {image.caption && (
-                        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-                            <p className="text-white text-sm md:text-base">{image.caption}</p>
-                        </div>
-                    )}
+                {/* Title and Description */}
+                <div className="mt-4 text-center text-white">
+                    <h2 className="text-xl font-semibold">{image.title || "Untitled"}</h2>
+                    <p className="text-sm text-gray-300">{image.description || "No description available."}</p>
                 </div>
             </div>
         </div>
