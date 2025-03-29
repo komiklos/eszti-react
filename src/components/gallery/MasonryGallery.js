@@ -4,14 +4,15 @@ import Masonry from 'react-masonry-css';
 import ImageModal from './ImageModal';
 
 const MasonryGallery = ({ images }) => {
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(-1);
 
     const handleImageClick = (image) => {
-        setSelectedImage(image);
+        const index = images.findIndex(img => img.id === image.id);
+        setSelectedImageIndex(index);
     };
 
     const handleCloseModal = () => {
-        setSelectedImage(null);
+        setSelectedImageIndex(-1);
     };
 
     // Responsive column configuration
@@ -54,8 +55,9 @@ const MasonryGallery = ({ images }) => {
             </Masonry>
 
             <ImageModal
-                isOpen={!!selectedImage}
-                image={selectedImage}
+                isOpen={selectedImageIndex >= 0}
+                images={images}
+                startIndex={selectedImageIndex}
                 onClose={handleCloseModal}
             />
         </div>
