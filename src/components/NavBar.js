@@ -55,13 +55,13 @@ export default function NavBar() {
         <>
             {/* Header (no longer fixed) */}
             <header className="bg-white border-b border-gray-100">
-                <div className="flex justify-between items-center px-8 py-6">
+                <div className="flex justify-between items-center px-8 py-2">
                     {/* Logo */}
                     <Link to="/" className="hover:opacity-80 transition-opacity">
                         <img
                             src={logo}
                             alt="Eszti Logo"
-                            className="h-10 md:h-12 lg:h-14 w-auto transform hover:scale-105 transition-transform"
+                            className="h-20 w-auto transform hover:scale-105 transition-transform"
                         />
                     </Link>
 
