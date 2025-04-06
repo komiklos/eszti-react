@@ -65,7 +65,7 @@ export default function FeaturedGallery() {
         );
 
     return (
-        <div className="mt-8 xl:mt-16">
+        <div className="mt-8 lg:mt-16">
             <MasonryGallery images={featuredImages} />
         </div>
     );

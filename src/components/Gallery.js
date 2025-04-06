@@ -96,7 +96,7 @@ export default function Gallery() {
                     <img
                     src={categoryImage}
                     alt={category.displayName}
-                    className="h-full ml-8 xl:ml-16 w-auto object-contain block"
+                    className="h-full ml-8 lg:ml-16 w-auto object-contain block"
                     style={{
                         height: '1.5rem',
                         width: 'auto',

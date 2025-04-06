@@ -57,7 +57,7 @@ export default function NavBar() {
             <header className="bg-white border-b border-gray-100">
                 <div className="flex justify-between items-center px-8 py-2">
                     {/* Logo */}
-                    <Link to="/" className="hover:opacity-80 transition-opacity">
+                    <Link to="/" className="hover:opacity-80 transitiogn-opacity">
                         <img
                             src={logo}
                             alt="Eszti Logo"

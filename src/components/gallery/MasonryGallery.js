@@ -23,16 +23,16 @@ const MasonryGallery = ({ images }) => {
     };
 
     return (
-        <div className="mx-8 xl:mx-16">
+        <div className="mx-8 lg:mx-16">
                 <Masonry
                     breakpointCols={breakpointColumns}
                     className="flex -m-2 w-auto"
-                    columnClassName="px-2 xl:px-4 bg-clip-padding"
+                    columnClassName="px-2 lg:px-4 bg-clip-padding"
                 >
                     {images.map((image, index) => (
                         <div
                             key={image.id || index}
-                            className="mb-4 xl:mb-8 group relative cursor-zoom-in"
+                            className="mb-4 lg:mb-8 group relative cursor-zoom-in"
                             onClick={() => handleImageClick(image)}
                         >
                             <div className="aspect-ratio-box">
