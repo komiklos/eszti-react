@@ -64,8 +64,8 @@ export default function AllCategoriesGallery() {
 // ... (keep all imports and state logic the same)
 
     return (
-        <div className="p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="p-8 xl:pl-16 xl:pr-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-x-4 xl:gap-x-8 gap-y-8">
                 {categoryPreviews.map((cat) => {
                     const categoryImage = getCategoryImage(cat.slug);
 
@@ -89,7 +89,7 @@ export default function AllCategoriesGallery() {
                             )}
 
                             {/* Title Below Thumbnail - Modified Section */}
-                            <div className="h-[1rem] min-w-[1rem] mt-2 flex items-center">
+                            <div className="h-[1rem] min-w-[1rem] mt-4 flex items-center">
                                 {categoryImage ? (
                                     <div className="relative h-full w-auto flex-none">
                                         <img
@@ -97,7 +97,7 @@ export default function AllCategoriesGallery() {
                                             alt={cat.displayName}
                                             className="h-full w-auto object-contain block"
                                             style={{
-                                                height: '1rem',
+                                                height: '1.25rem',
                                                 width: 'auto',
                                                 minWidth: '1.5rem'
                                             }}
