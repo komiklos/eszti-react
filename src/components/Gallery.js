@@ -6,6 +6,11 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import MasonryGallery from './gallery/MasonryGallery';
 import MasonrySkeletonLoader from './MasonrySkeletonLoader';
+import ceramics1 from "../assets/eszti_assets/ceramics1.png";
+import editorial1 from "../assets/eszti_assets/editorial1.png";
+import kidlit1 from "../assets/eszti_assets/kidlit1.png";
+import personal1 from "../assets/eszti_assets/personal1.png";
+import riso1 from "../assets/eszti_assets/riso1.png";
 
 export default function Gallery() {
     const { slug } = useParams();
@@ -13,6 +18,17 @@ export default function Gallery() {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const getCategoryImage = (slug) => {
+        switch(slug) {
+            case 'ceramics': return ceramics1;
+            case 'editorial': return editorial1;
+            case 'kids-editorial': return kidlit1;
+            case 'personal-projects': return personal1;
+            case 'paintings': return riso1;
+            default: return null;
+        }
+    };
 
     useEffect(() => {
         const fetchCategoryData = async () => {
@@ -72,10 +88,23 @@ export default function Gallery() {
             </div>
         );
 
+    const categoryImage = getCategoryImage(slug);
+
     return (
-        <div className="p-8">
-            <h1 className="text-3xl font-bold mb-8 text-gray-800">{category.displayName}</h1>
-            <MasonryGallery images={images} />
+        <div>
+            <div className="my-8 xl:ml-2">
+                    <img
+                    src={categoryImage}
+                    alt={category.displayName}
+                    className="h-full ml-8 xl:ml-16 w-auto object-contain block"
+                    style={{
+                        height: '1.5rem',
+                        width: 'auto',
+                        minWidth: '1.5rem'
+                    }}
+                />
+            </div>
+            <MasonryGallery images={images}/>
         </div>
     );
 }

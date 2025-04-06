@@ -64,7 +64,7 @@ export default function AllCategoriesGallery() {
 // ... (keep all imports and state logic the same)
 
     return (
-        <div className="p-8 xl:pl-16 xl:pr-16">
+        <div className="m-8 xl:mt-16 xl:mx-16">
             <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-x-4 xl:gap-x-8 gap-y-8">
                 {categoryPreviews.map((cat) => {
                     const categoryImage = getCategoryImage(cat.slug);
