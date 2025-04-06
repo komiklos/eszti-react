@@ -55,7 +55,7 @@ export default function FeaturedGallery() {
         fetchFeaturedImages();
     }, []);
 
-    if (loading) return <MasonrySkeletonLoader />;
+    if (loading) return <MasonrySkeletonLoader hasTitle={false}/>;
 
     if (error)
         return (

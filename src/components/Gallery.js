@@ -79,7 +79,7 @@ export default function Gallery() {
         fetchCategoryData();
     }, [slug]);
 
-    if (loading) return <MasonrySkeletonLoader />;
+    if (loading) return <MasonrySkeletonLoader hasTitle={true}/>;
 
     if (error)
         return (
@@ -92,7 +92,7 @@ export default function Gallery() {
 
     return (
         <div>
-            <div className="my-8 xl:ml-2">
+            <div className="my-8 sm:ml-2 xl:ml-2">
                     <img
                     src={categoryImage}
                     alt={category.displayName}

@@ -19,7 +19,7 @@ const MasonryGallery = ({ images }) => {
     const breakpointColumns = {
         default: 3,
         1536: 2,
-        640: 1
+        768: 1
     };
 
     return (

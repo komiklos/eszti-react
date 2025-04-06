@@ -1,8 +1,8 @@
 // components/AllCategoriesSkeletonLoader.js
 export default function AllCategoriesSkeletonLoader() {
     return (
-        <div className="p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="m-8 xl:mt-16 xl:mx-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-x-4 xl:gap-x-8 gap-y-8">
                 {[...Array(6)].map((_, index) => (
                     <div key={index} className="group relative block overflow-hidden">
                         {/* Skeleton Thumbnail */}
