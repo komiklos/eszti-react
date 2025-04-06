@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import logo from "../assets/eszti_logo.png";
+import logo from "../assets/eszti_assets/esztiviraglogo.png";
 import about1 from "../assets/eszti_assets/about1.png";
 import about2 from "../assets/eszti_assets/about2.png";
 import about3 from "../assets/eszti_assets/about3.png";
