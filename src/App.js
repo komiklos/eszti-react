@@ -2,6 +2,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AdminGate from './components/AdminGate';
 import UploadForm from './components/UploadForm';
 import NavBar from './components/NavBar';
@@ -43,6 +45,7 @@ export default function App() {
                 />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
+            <ToastContainer />
             <Footer />
         </Router>
     );
