@@ -126,6 +126,16 @@ export default function NavBar() {
                     ))}
                 </nav>
             </div>
+            {/* Admin Link */}
+            <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                    `ml-auto text-red-500 transition-colors font-bold text-lg
+                     ${isActive ? 'text-red-600' : 'hover:text-red-400'}`
+                }
+            >
+                Admin
+            </NavLink>
 
             {/* Overlay for mobile */}
             {isOpen && (
