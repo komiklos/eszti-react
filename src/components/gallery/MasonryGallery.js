@@ -41,6 +41,7 @@ const MasonryGallery = ({ images }) => {
                                     alt={image.alt || `Artwork ${index + 1}`}
                                     className="w-full h-full object-cover shadow-lg transition-transform duration-300 group-hover:scale-95"
                                     loading="lazy"
+                                    style={{ cursor: 'pointer' }}
                                 />
                             </div>
 

@@ -1,7 +1,7 @@
 // Footer.js
 import React from 'react';
 import { FaInstagram, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import { toast } from 'react-toastify'; // Install react-toastify if not already installed
+import { toast } from 'react-toastify';
 
 export default function Footer() {
     const copyEmail = () => {
