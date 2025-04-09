@@ -17,7 +17,9 @@ service cloud.firestore {
           && request.resource.data.storagePath is string
           && request.resource.data.url is string
           && request.resource.data.createdAt is timestamp
-          && request.resource.data.fileName is string;
+          && request.resource.data.fileName is string &&
+          !exists(/databases/$(database)/documents/categories/$(categoryId)/images/$(imageId));
+
         allow delete: if request.auth != null;
       }
     }
