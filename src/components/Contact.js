@@ -14,7 +14,7 @@ export default function Contact() {
     };
 
     return (
-        <div className="p-8 max-w-xl mx-auto">
+        <div className="p-8 max-w-lg mx-auto">
             {/* Lets Work Together Image */}
             <div className="mt-24 mb-32 flex justify-center">
                 <img

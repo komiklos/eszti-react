@@ -66,7 +66,7 @@ export default function NavBar() {
                     </Link>
 
                     {/* Desktop Navigation - Centered below logo */}
-                    <div className="hidden md:flex gap-8">
+                    <div className="hidden sm:flex gap-8">
                         {navItems.map((item) => (
                             <NavLink
                                 key={item.to}
@@ -90,7 +90,7 @@ export default function NavBar() {
                     {/* Hamburger Button (mobile only) - Positioned absolutely */}
                     <button
                         onClick={toggleDrawer}
-                        className="md:hidden p-2 rounded-md absolute top-4 right-4"
+                        className="sm:hidden p-2 rounded-md absolute top-4 right-4"
                     >
                         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                     </button>
@@ -100,7 +100,7 @@ export default function NavBar() {
             {/* Mobile Drawer */}
             <div className={`
                 fixed top-0 left-0 z-30 w-64 h-full bg-white shadow-lg
-                transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden
+                transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} sm:hidden
                 transition-transform duration-300 ease-in-out
                 pt-16
             `}>
@@ -130,7 +130,7 @@ export default function NavBar() {
             {/* Overlay for mobile */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+                    className="fixed inset-0 bg-black bg-opacity-50 z-20 sm:hidden"
                     onClick={toggleDrawer}
                 />
             )}
