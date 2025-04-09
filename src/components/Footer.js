@@ -2,6 +2,7 @@
 import React from 'react';
 import { FaInstagram, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { NavLink } from 'react-router-dom';
 
 export default function Footer() {
     const copyEmail = () => {
@@ -50,6 +51,17 @@ export default function Footer() {
                         <FaEnvelope size={24} />
                     </button>
                 </div>
+
+                {/* Admin Link */}
+                <NavLink
+                    to="/admin"
+                    className={({ isActive }) =>
+                        `text-red-500 transition-colors font-bold text-lg
+                         ${isActive ? 'text-red-600' : 'hover:text-red-400'}`
+                    }
+                >
+                    Admin
+                </NavLink>
 
                 {/* Signature */}
                 <p className="text-gray-600 text-sm">

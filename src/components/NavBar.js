@@ -53,11 +53,11 @@ export default function NavBar() {
 
     return (
         <>
-            {/* Header (no longer fixed) */}
+            {/* Header */}
             <header className="bg-white border-b border-gray-100">
-                <div className="flex justify-between items-center px-8 py-2">
-                    {/* Logo */}
-                    <Link to="/" className="hover:opacity-80 transitiogn-opacity">
+                <div className="flex flex-col items-center px-8 py-4">
+                    {/* Logo - Centered at top */}
+                    <Link to="/" className="hover:opacity-80 transition-opacity mb-4">
                         <img
                             src={logo}
                             alt="Eszti Logo"
@@ -65,15 +65,7 @@ export default function NavBar() {
                         />
                     </Link>
 
-                    {/* Hamburger Button (mobile only) */}
-                    <button
-                        onClick={toggleDrawer}
-                        className="md:hidden p-2 rounded-md"
-                    >
-                        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-                    </button>
-
-                    {/* Desktop Navigation */}
+                    {/* Desktop Navigation - Centered below logo */}
                     <div className="hidden md:flex gap-8">
                         {navItems.map((item) => (
                             <NavLink
@@ -94,16 +86,24 @@ export default function NavBar() {
                             </NavLink>
                         ))}
                     </div>
+
+                    {/* Hamburger Button (mobile only) - Positioned absolutely */}
+                    <button
+                        onClick={toggleDrawer}
+                        className="md:hidden p-2 rounded-md absolute top-4 right-4"
+                    >
+                        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                    </button>
                 </div>
             </header>
 
             {/* Mobile Drawer */}
             <div className={`
-    fixed top-0 left-0 z-30 w-64 h-full bg-white shadow-lg
-    transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden
-    transition-transform duration-300 ease-in-out
-    pt-16
-`}>
+                fixed top-0 left-0 z-30 w-64 h-full bg-white shadow-lg
+                transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden
+                transition-transform duration-300 ease-in-out
+                pt-16
+            `}>
                 <nav className="flex flex-col gap-8 px-8 py-6">
                     {navItems.map((item) => (
                         <NavLink
@@ -126,16 +126,6 @@ export default function NavBar() {
                     ))}
                 </nav>
             </div>
-            {/* Admin Link */}
-            <NavLink
-                to="/admin"
-                className={({ isActive }) =>
-                    `ml-auto text-red-500 transition-colors font-bold text-lg
-                     ${isActive ? 'text-red-600' : 'hover:text-red-400'}`
-                }
-            >
-                Admin
-            </NavLink>
 
             {/* Overlay for mobile */}
             {isOpen && (
