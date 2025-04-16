@@ -52,17 +52,6 @@ export default function Footer() {
                     </button>
                 </div>
 
-                {/* Admin Link */}
-                <NavLink
-                    to="/admin"
-                    className={({ isActive }) =>
-                        `text-red-500 transition-colors font-bold text-lg
-                         ${isActive ? 'text-red-600' : 'hover:text-red-400'}`
-                    }
-                >
-                    Admin
-                </NavLink>
-
                 {/* Signature */}
                 <p className="text-gray-600 text-sm">
                     © 2025 Kondász Eszter. All rights reserved.
