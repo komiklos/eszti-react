@@ -31,22 +31,26 @@ export default function App() {
     });
 
     return (
-        <Router>
-            <NavBar />
-            <Routes>
-                <Route path="/" element={<FeaturedGallery />} />
-                <Route path="/all-categories" element={<AllCategoriesGallery />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/:slug" element={<Gallery />} />
-                <Route
-                    path="/admin"
-                    element={user ? <UploadForm /> : <AdminGate />}
-                />
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-            <ToastContainer />
-            <Footer />
-        </Router>
+        <div className="min-h-screen flex flex-col"> {/* Added wrapper div */}
+            <Router>
+                <NavBar />
+                <main className="flex-grow"> {/* Added main with flex-grow */}
+                    <Routes>
+                        <Route path="/" element={<FeaturedGallery />} />
+                        <Route path="/all-categories" element={<AllCategoriesGallery />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/:slug" element={<Gallery />} />
+                        <Route
+                            path="/admin"
+                            element={user ? <UploadForm /> : <AdminGate />}
+                        />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                </main>
+                <ToastContainer />
+                <Footer />
+            </Router>
+        </div>
     );
 }

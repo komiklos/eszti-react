@@ -1,8 +1,7 @@
-// Footer.js
+// components/Footer.js
 import React from 'react';
 import { FaInstagram, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { NavLink } from 'react-router-dom';
 
 export default function Footer() {
     const copyEmail = () => {
@@ -15,7 +14,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-gray-100 pt-12 pb-24 mt-12">
+        <footer className="bg-gray-100 pt-12 pb-24 mt-auto w-full"> {/* Changed mt-12 to mt-auto */}
             <div className="container mx-auto px-8 flex flex-col items-center gap-4">
                 {/* Social Media Icons */}
                 <div className="flex gap-6">
