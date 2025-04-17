@@ -61,7 +61,7 @@ export default function NavBar() {
                         <img
                             src={logo}
                             alt="Eszti Logo"
-                            className="h-20 w-auto transform hover:scale-105 transition-transform"
+                            className="h-24 md:h-40 w-auto transform hover:scale-105 transition-transform"
                         />
                     </Link>
 

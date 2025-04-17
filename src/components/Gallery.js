@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db, storage } from '../firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import MasonryGallery from './gallery/MasonryGallery';
 import MasonrySkeletonLoader from './MasonrySkeletonLoader';
@@ -50,9 +50,13 @@ export default function Gallery() {
                 const categoryData = categoryDoc.data();
                 setCategory({ id: categoryDoc.id, ...categoryData });
 
-                // Fetch images
+                // Fetch images ordered by createdAt (newest first)
                 const imagesRef = collection(db, 'categories', categoryDoc.id, 'images');
-                const imagesSnapshot = await getDocs(imagesRef);
+                const imagesQuery = query(
+                    imagesRef,
+                    orderBy('createdAt', 'desc')  // This is the key change
+                );
+                const imagesSnapshot = await getDocs(imagesQuery);
 
                 const imagesWithUrls = await Promise.all(
                     imagesSnapshot.docs.map(async (doc) => {
@@ -63,6 +67,7 @@ export default function Gallery() {
                             url,
                             alt: imageData.description || categoryData.displayName,
                             caption: imageData.description || '',
+                            createdAt: imageData.createdAt?.toDate() || new Date() // Ensure date exists
                         };
                     })
                 );
@@ -93,9 +98,9 @@ export default function Gallery() {
     return (
         <div>
             <div className="my-8 sm:ml-2 xl:ml-2">
-                    <img
+                <img
                     src={categoryImage}
-                    alt={category.displayName}
+                    alt={category?.displayName}
                     className="h-full ml-8 lg:ml-16 w-auto object-contain block"
                     style={{
                         height: '1.5rem',

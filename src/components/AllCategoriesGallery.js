@@ -1,7 +1,8 @@
+// components/AllCategoriesGallery.js
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { db, storage } from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import ImageModal from './gallery/ImageModal';
 import AllCategoriesSkeletonLoader from "./AllCategoriesSkeletonLoader";
@@ -23,17 +24,27 @@ export default function AllCategoriesGallery() {
             const previews = await Promise.all(
                 categoriesSnapshot.docs.map(async (doc) => {
                     const categoryData = doc.data();
-                    const imagesSnapshot = await getDocs(
-                        collection(db, 'categories', doc.id, 'images')
+
+                    // Get images ordered by createdAt (newest first)
+                    const imagesQuery = query(
+                        collection(db, 'categories', doc.id, 'images'),
+                        orderBy('createdAt', 'desc')
                     );
+                    const imagesSnapshot = await getDocs(imagesQuery);
 
                     if (imagesSnapshot.empty) return { id: doc.id, ...categoryData, thumbnail: null };
 
-                    const firstImage = imagesSnapshot.docs[0].data();
-                    const thumbnailRef = ref(storage, firstImage.storagePath);
+                    // Use the first document (newest image) as thumbnail
+                    const newestImage = imagesSnapshot.docs[0].data();
+                    const thumbnailRef = ref(storage, newestImage.storagePath);
                     const thumbnailUrl = await getDownloadURL(thumbnailRef);
 
-                    return { id: doc.id, ...categoryData, thumbnail: thumbnailUrl };
+                    return {
+                        id: doc.id,
+                        ...categoryData,
+                        thumbnail: thumbnailUrl,
+                        newestImageDate: newestImage.createdAt // Optional: store timestamp
+                    };
                 })
             );
 
