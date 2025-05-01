@@ -28,7 +28,7 @@ export default function AllCategoriesGallery() {
                     // Get images ordered by createdAt (newest first)
                     const imagesQuery = query(
                         collection(db, 'categories', doc.id, 'images'),
-                        orderBy('createdAt', 'desc')
+                        orderBy('fileName', 'desc')
                     );
                     const imagesSnapshot = await getDocs(imagesQuery);
 

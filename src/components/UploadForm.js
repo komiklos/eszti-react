@@ -2,7 +2,18 @@
 import { useState, useEffect } from 'react';
 import { db, storage, auth } from '../firebase';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { collection, addDoc, doc, deleteDoc, onSnapshot, query, where, getDocs, Timestamp } from 'firebase/firestore';
+import {
+    collection,
+    addDoc,
+    doc,
+    deleteDoc,
+    onSnapshot,
+    query,
+    where,
+    getDocs,
+    Timestamp,
+    getDoc
+} from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 
 const CATEGORIES = [
@@ -42,10 +53,20 @@ export default function UploadForm() {
     const handleFeature = async (imageId) => {
         if (!window.confirm('Add this image to featured collection?')) return;
 
+        // First get the image document to access its fileName
+        const imageDoc = await getDoc(doc(db, 'categories', selectedSlug, 'images', imageId));
+
+        if (!imageDoc.exists()) {
+            throw new Error('Image document not found');
+        }
+
+        const imageData = imageDoc.data();
+
         try {
             await addDoc(collection(db, 'featured'), {
                 categoryId: selectedSlug,
                 imageId,
+                fileName: imageData.fileName,
                 createdAt: new Date()
             });
             alert('Image added to featured collection!');

@@ -54,7 +54,7 @@ export default function Gallery() {
                 const imagesRef = collection(db, 'categories', categoryDoc.id, 'images');
                 const imagesQuery = query(
                     imagesRef,
-                    orderBy('createdAt', 'desc')  // This is the key change
+                    orderBy('fileName', 'desc')  // This is the key change
                 );
                 const imagesSnapshot = await getDocs(imagesQuery);
 

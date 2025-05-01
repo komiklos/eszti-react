@@ -17,7 +17,7 @@ export default function FeaturedGallery() {
                 setLoading(true);
 
                 // Get featured items ordered by creation date
-                const featuredQuery = query(collection(db, 'featured'), orderBy('createdAt', 'desc'));
+                const featuredQuery = query(collection(db, 'featured'), orderBy('fileName', 'desc'));
                 const featuredSnapshot = await getDocs(featuredQuery);
 
                 // Fetch linked image data
@@ -38,6 +38,7 @@ export default function FeaturedGallery() {
                             id: docSnap.id,
                             url: imageUrl,
                             alt: imageData.description || '',
+                            fileName: imageData.fileName || '',
                             caption: imageData.description || '',
                         };
                     })
