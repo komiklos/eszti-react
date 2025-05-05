@@ -2,6 +2,9 @@
 import React, { useEffect, useRef } from 'react';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import rArrow from "../../assets/icons/jobbnyil.png";
+import lArrow from "../../assets/icons/balnyil.png";
+
 
 const ImageModal = ({ isOpen, images, startIndex, onClose }) => {
     const modalRef = useRef();
@@ -60,6 +63,36 @@ const ImageModal = ({ isOpen, images, startIndex, onClose }) => {
                     slideDuration={0}
                     slideInterval={0}
                     disableSwipe={true}
+                    renderRightNav={(onClick, disabled) => (
+                        <button
+                            type="button"
+                            className={`opacity-100 hover:opacity-60 image-gallery-icon image-gallery-right-nav ${disabled ? 'disabled' : ''}`}
+                            disabled={disabled}
+                            onClick={onClick}
+                            aria-label="Next Slide"
+                        >
+                            <img
+                                src={rArrow}
+                                alt="Next"
+                                className="h-8 md:h-12 xl:h-16 w-auto transition-opacity"
+                            />
+                        </button>
+                    )}
+                    renderLeftNav={(onClick, disabled) => (
+                        <button
+                            type="button"
+                            className={`opacity-100 hover:opacity-60 image-gallery-icon image-gallery-left-nav ${disabled ? 'disabled' : ''}`}
+                            disabled={disabled}
+                            onClick={onClick}
+                            aria-label="Previous Slide"
+                        >
+                            <img
+                                src={lArrow}
+                                alt="Previous"
+                                className="h-8 md:h-12 xl:h-16 w-auto  transition-opacity"
+                            />
+                        </button>
+                    )}
                     renderItem={(item) => (
                         <div className="flex flex-col items-center justify-center h-full">
                             <img

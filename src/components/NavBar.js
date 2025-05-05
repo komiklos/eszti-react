@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import logo from "../assets/eszti_assets/esztiviraglogo.png";
 import about1 from "../assets/eszti_assets/about1.png";
@@ -13,7 +13,8 @@ import mywork3 from "../assets/eszti_assets/mywork3.png";
 import home1 from "../assets/eszti_assets/home1.png";
 import home2 from "../assets/eszti_assets/home2.png";
 import home3 from "../assets/eszti_assets/home3.png";
-import { FiMenu, FiX } from 'react-icons/fi';
+import hamburger from "../assets/icons/hamburger.png";
+import xIcon from "../assets/icons/Xicon.png";
 
 export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -92,7 +93,9 @@ export default function NavBar() {
                         onClick={toggleDrawer}
                         className="sm:hidden p-2 rounded-md absolute top-4 right-4"
                     >
-                        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                        {isOpen ? <img src={xIcon} alt="xIcon" className="h-6 w-auto"/> :
+                            <img src={hamburger} alt="hamburger" className="h-6 w-auto"/>}
+                        {/*{isOpen ? <FiX size={24} /> : <FiMenu size={24} />}*/}
                     </button>
                 </div>
             </header>
