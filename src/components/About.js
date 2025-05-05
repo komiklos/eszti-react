@@ -17,7 +17,7 @@ A distinctive feature of her style is the playful personification of inanimate o
             <
                 div className="whitespace-pre-line text-gray-700">
                 {`
-She has extensive experience as an illustrator for children’s magazines, along with a growing portfolio in editorial illustration across both print and digital media. 
+                She has extensive experience as an illustrator for children’s magazines, along with a growing portfolio in editorial illustration across both print and digital media. 
 Her work has appeared in women’s magazines and psychology publications, and she has contributed to various feminist editorial projects. 
 
 Clients include: Glamour magazine, HVG Psychology magazine, Lazy Women, … While she continues to enjoy children’s publishing, her current focus is on a broader range of editorial work.
@@ -28,11 +28,10 @@ She works both from home and from Valami Produktív, a creative studio in the ci
 
 `}
             </div>
+            <h3>𝓐𝓹𝓹𝓮𝓪𝓻𝓪𝓷𝓬𝓮𝓼, 𝓪𝓬𝓱𝓲𝓮𝓿𝓮𝓶𝓮𝓷𝓽𝓼 𝓪𝓷𝓭 𝓹𝓾𝓫𝓵𝓲𝓬𝓪𝓽𝓲𝓸𝓷𝓼</h3>
 
             <div className="text-gray-700">
-                <h3>𝓐𝓹𝓹𝓮𝓪𝓻𝓪𝓷𝓬𝓮𝓼, 𝓪𝓬𝓱𝓲𝓮𝓿𝓮𝓶𝓮𝓷𝓽𝓼 𝓪𝓷𝓭 𝓹𝓾𝓫𝓵𝓲𝓬𝓪𝓽𝓲𝓸𝓷𝓼</h3>
-
-                <p className="font-semibold mt-4">2025:</p>
+                <p className="font-semibold mt-6">2025:</p>
                 <ul className="list-disc pl-8 ">
                     <li className="pl-2">'Woman to Woman' self initiated collaborative zine with 8 female creators for
                         International Women's Day

@@ -1,7 +1,10 @@
 // components/Footer.js
 import React from 'react';
-import { FaInstagram, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import facebook from "../assets/icons/facebook.png";
+import instagram from "../assets/icons/insta.png";
+import linkedin from "../assets/icons/linkedin.png";
+import mail from "../assets/icons/mail.png";
 
 export default function Footer() {
     const copyEmail = () => {
@@ -14,7 +17,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-gray-100 pt-12 pb-24 mt-auto w-full"> {/* Changed mt-12 to mt-auto */}
+        <footer className="bg-gray-100 pt-12 pb-24 mt-auto w-full">
             <div className="container mx-auto px-8 flex flex-col items-center gap-4">
                 {/* Social Media Icons */}
                 <div className="flex gap-6">
@@ -22,32 +25,32 @@ export default function Footer() {
                         href="https://www.instagram.com/kondaszeszti/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                        className="hover:opacity-80 transition-opacity"
                     >
-                        <FaInstagram size={24} />
+                        <img src={instagram} alt="Instagram" className="h-6 w-auto" />
                     </a>
                     <a
                         href="https://www.facebook.com/kondaase"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                        className="hover:opacity-80 transition-opacity"
                     >
-                        <FaFacebook size={24} />
+                        <img src={facebook} alt="Facebook" className="h-6 w-auto" />
                     </a>
                     <a
                         href="https://www.linkedin.com/in/kondaszeszti/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                        className="hover:opacity-80 transition-opacity"
                     >
-                        <FaLinkedin size={24} />
+                        <img src={linkedin} alt="LinkedIn" className="h-6 w-auto" />
                     </a>
                     <button
                         onClick={copyEmail}
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                        className="hover:opacity-80 transition-opacity"
                         aria-label="Copy email"
                     >
-                        <FaEnvelope size={24} />
+                        <img src={mail} alt="Email" className="h-6 w-auto" />
                     </button>
                 </div>
 
