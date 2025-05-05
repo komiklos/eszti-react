@@ -4,6 +4,7 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import rArrow from "../../assets/icons/jobbnyil.png";
 import lArrow from "../../assets/icons/balnyil.png";
+import xIcon from "../../assets/icons/Xicon.png";
 
 
 const ImageModal = ({ isOpen, images, startIndex, onClose }) => {
@@ -48,9 +49,11 @@ const ImageModal = ({ isOpen, images, startIndex, onClose }) => {
                     onClick={onClose}
                     aria-label="Close"
                 >
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLineenv="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <img
+                        src={xIcon}
+                        alt="Close"
+                        className="opacity-100 hover:opacity-60 h-4 md:h-6 w-auto transition-opacity"
+                    />
                 </button>
 
                 <ImageGallery
@@ -90,6 +93,20 @@ const ImageModal = ({ isOpen, images, startIndex, onClose }) => {
                                 src={lArrow}
                                 alt="Previous"
                                 className="h-8 md:h-12 xl:h-16 w-auto  transition-opacity"
+                            />
+                        </button>
+                    )}
+                    renderCloseButton={(onClick) => (
+                        <button
+                            type="button"
+                            className="opacity-100 hover:opacity-60 image-gallery-icon image-gallery-close"
+                            onClick={onClick}
+                            aria-label="Close Gallery"
+                        >
+                            <img
+                                src={xIcon}
+                                alt="Close"
+                                className="h-6 md:h-8 w-auto transition-opacity"
                             />
                         </button>
                     )}
