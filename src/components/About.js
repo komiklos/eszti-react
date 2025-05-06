@@ -1,7 +1,7 @@
 export default function About() {
     return (
         <div className="my-16 max-w-2xl mx-auto p-8">
-            <h3>𝓐𝓫𝓸𝓾𝓽</h3>
+            <h3 className="text-xl">𝓐𝓫𝓸𝓾𝓽</h3>
             <div className="whitespace-pre-line text-gray-700">
                 {`
                 ESZTI Kondász is a Hungarian illustrator based in Budapest.
@@ -13,7 +13,7 @@ A distinctive feature of her style is the playful personification of inanimate o
 
 `}
             </div>
-            <h3>𝓦𝓸𝓻𝓴</h3>
+            <h3 className="text-xl">𝓦𝓸𝓻𝓴</h3>
             <
                 div className="whitespace-pre-line text-gray-700">
                 {`
@@ -28,7 +28,7 @@ She works both from home and from Valami Produktív, a creative studio in the ci
 
 `}
             </div>
-            <h3>𝓐𝓹𝓹𝓮𝓪𝓻𝓪𝓷𝓬𝓮𝓼, 𝓪𝓬𝓱𝓲𝓮𝓿𝓮𝓶𝓮𝓷𝓽𝓼 𝓪𝓷𝓭 𝓹𝓾𝓫𝓵𝓲𝓬𝓪𝓽𝓲𝓸𝓷𝓼</h3>
+            <h3 className="text-xl">𝓐𝓹𝓹𝓮𝓪𝓻𝓪𝓷𝓬𝓮𝓼, 𝓪𝓬𝓱𝓲𝓮𝓿𝓮𝓶𝓮𝓷𝓽𝓼 𝓪𝓷𝓭 𝓹𝓾𝓫𝓵𝓲𝓬𝓪𝓽𝓲𝓸𝓷𝓼</h3>
 
             <div className="text-gray-700">
                 <p className="font-semibold mt-6">2025:</p>

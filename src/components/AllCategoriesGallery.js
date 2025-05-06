@@ -108,9 +108,9 @@ export default function AllCategoriesGallery() {
                                             alt={cat.displayName}
                                             className="h-full w-auto object-contain block"
                                             style={{
-                                                height: '1.25rem',
+                                                height: '1rem',
                                                 width: 'auto',
-                                                minWidth: '1.5rem'
+                                                minWidth: '1rem'
                                             }}
                                         />
                                     </div>

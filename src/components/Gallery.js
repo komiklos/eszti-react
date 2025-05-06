@@ -103,9 +103,9 @@ export default function Gallery() {
                     alt={category?.displayName}
                     className="h-full ml-8 lg:ml-16 w-auto object-contain block"
                     style={{
-                        height: '1.5rem',
+                        height: '1rem',
                         width: 'auto',
-                        minWidth: '1.5rem'
+                        minWidth: '1rem'
                     }}
                 />
             </div>

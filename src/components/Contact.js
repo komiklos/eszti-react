@@ -14,13 +14,13 @@ export default function Contact() {
     };
 
     return (
-        <div className="p-8 max-w-sm md:max-w-md mx-auto">
+        <div className="p-8 max-w-xs md:max-w-sm mx-auto">
             {/* Lets Work Together Image */}
             <div className="mt-32 mb-32 flex justify-center">
                 <img
                     src={letsWorkTogether}
                     alt="Let's Work Together"
-                    className="max-w-full h-auto cursor-pointer hover:opacity-70 transition-opacity"
+                    className="max-w-full h-auto cursor-pointer hover:opacity-60 transition-opacity"
                     onClick={copyEmail}
                 />
             </div>
