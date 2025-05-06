@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 @import "tailwindcss";
 
+/* Remove shadow from navigation buttons */
+.image-gallery-icon.image-gallery-right-nav,
+.image-gallery-icon.image-gallery-left-nav {
+    box-shadow: none !important;
+    filter: none !important;
+}
+
 /* Smooth transitions */
 .transition-colors {
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
