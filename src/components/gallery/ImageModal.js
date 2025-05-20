@@ -77,7 +77,7 @@ const ImageModal = ({ isOpen, images, startIndex, onClose }) => {
                             <img
                                 src={rArrow}
                                 alt="Next"
-                                className="h-8 md:h-12 xl:h-16 w-auto transition-opacity"
+                                className="h-8 w-auto transition-opacity"
                             />
                         </button>
                     )}
@@ -92,7 +92,7 @@ const ImageModal = ({ isOpen, images, startIndex, onClose }) => {
                             <img
                                 src={lArrow}
                                 alt="Previous"
-                                className="h-8 md:h-12 xl:h-16 w-auto  transition-opacity"
+                                className="h-8  w-auto  transition-opacity"
                             />
                         </button>
                     )}

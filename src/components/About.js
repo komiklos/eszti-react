@@ -1,5 +1,6 @@
 import sziv from "../assets/gifs/sziv3.gif";
 import tulip from "../assets/gifs/virag3.gif";
+import personalImage from "../assets/eszti_about_personal.jpeg";
 
 export default function About() {
     return (
@@ -8,7 +9,7 @@ export default function About() {
             <div
                 className="flex flex-col md:flex-row items-center gap-8 mb-8"> {/* Changed items-start to items-center */}
                 <div className="md:w-3/4 order-1">
-                    <h3 className="text-4xl mb-4">𝓐𝓫𝓸𝓾𝓽</h3>
+                    <h3 className="text-xl">𝓐𝓫𝓸𝓾𝓽</h3>
                     <div className="whitespace-pre-line text-gray-700">
                         {`
 ESZTI Kondász is a Hungarian illustrator based in Budapest.
@@ -16,7 +17,7 @@ Her illustrations are rich in vivid and vibrant colours inspired by the world of
 
 In her work she frequently incorporates symbolic elements, tarot motifs, and botanical details, while also exploring themes of feminism and mental health.
 
-A distinctive feature of her style is the playful personification of inanimate objects around us often accompanied by a thoughtful play on double or alternative meanings
+A distinctive feature of her style is the playful personification of inanimate objects around us often accompanied by a thoughtful play on double or alternative meanings.
 `}
                     </div>
                 </div>
@@ -40,7 +41,7 @@ A distinctive feature of her style is the playful personification of inanimate o
                     />
                 </div>
                 <div className="md:w-3/4 order-1 md:order-2">
-                    <h3 className="text-4xl mb-4">𝓦𝓸𝓻𝓴</h3>
+                    <h3 className="text-xl">𝓦𝓸𝓻𝓴</h3>
                     <div className="whitespace-pre-line text-gray-700">
                         {`
 She has extensive experience as an illustrator for children's magazines, along with a growing portfolio in editorial illustration across both print and digital media. 
@@ -58,7 +59,7 @@ She works both from home and from Valami Produktív, a creative studio in the ci
 
             {/* Appearances section (full width) */}
             <div className="w-full">
-                <h3 className="text-4xl mb-4">𝓐𝓹𝓹𝓮𝓪𝓻𝓪𝓷𝓬𝓮𝓼, 𝓪𝓬𝓱𝓲𝓮𝓿𝓮𝓶𝓮𝓷𝓽𝓼 𝓪𝓷𝓭 𝓹𝓾𝓫𝓵𝓲𝓬𝓪𝓽𝓲𝓸𝓷𝓼</h3>
+                <h3 className="text-xl mb-4">𝓐𝓹𝓹𝓮𝓪𝓻𝓪𝓷𝓬𝓮𝓼, 𝓪𝓬𝓱𝓲𝓮𝓿𝓮𝓶𝓮𝓷𝓽𝓼 𝓪𝓷𝓭 𝓹𝓾𝓫𝓵𝓲𝓬𝓪𝓽𝓲𝓸𝓷𝓼</h3>
                 <div className="text-gray-700">
                     <p className="font-semibold mt-6">2025:</p>
                     <ul className="list-disc pl-8 ">
@@ -125,6 +126,15 @@ She works both from home and from Valami Produktív, a creative studio in the ci
                         </li>
                     </ul>
                 </div>
+            </div>
+
+            {/* Personal Image at the bottom */}
+            <div className="mt-12 flex justify-center">
+                <img
+                    src={personalImage}
+                    alt="Eszti Kondász"
+                    className="w-full max-w-xl"
+                />
             </div>
         </div>
     );
